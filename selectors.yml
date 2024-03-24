@@ -1,0 +1,32 @@
+product_title:
+    css: 'h1 a[data-hook="product-link"]'
+    type: Text
+reviews:
+    css: 'div.review div.a-section.celwidget'
+    multiple: true
+    type: Text
+    children:
+        reviewerId:
+            css: review
+            type: Text
+        asin:
+            css: 'span#cr-state-object'
+            type: attribute
+            attribute: 'data-state'
+            regex: '"asin":"([^"]+)"'
+        reviewerName:
+            css: span.a-profile-name
+            type: Text
+        reviewerText:
+            css: 'div.a-row.review-data span.review-text'
+            type: Text
+        overall:
+            css: 'div.a-row > a > i > span'
+            type: Text
+        reviewTime:
+            css: span.a-size-base.a-color-secondary
+            type: Text
+
+next_page:
+    css: 'li.a-last a'
+    type: Link
