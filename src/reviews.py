@@ -6,7 +6,7 @@ from dateutil import parser as dateparser
 import time
 
 # Create an Extractor by reading from the YAML file
-e = Extractor.from_yaml_file('selectors.yml')
+e = Extractor.from_yaml_file('src/selectors.yml')
 MAX_RETRIES = 10
 baseUrl = ''
 
@@ -82,7 +82,7 @@ def save_data(url):
         return
 
 # product_data = []
-with open("urls.txt", 'r') as urllist, open('../Data/data.csv', 'w') as outfile:
+with open("src/urls.txt", 'r') as urllist, open('data.csv', 'w') as outfile:
     writer = csv.DictWriter(outfile, fieldnames=["reviewerId", "asin", "reviewerName", "reviewerText", "overall", "reviewTime"], quoting=csv.QUOTE_ALL)
     writer.writeheader()
 
