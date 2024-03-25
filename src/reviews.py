@@ -59,11 +59,22 @@ def save_data(url):
 
     if data:
         for r in data['reviews']:
+            overall_rating = r.get("overall", "")
+            if ' out of 5 stars' in overall_rating:
+                overall_rating = overall_rating.split(' out of 5 stars')[0]
+
+            review_time = r.get("reviewTime", "")
+
+            # Eğer 'on' kelimesi içeriyorsa, tarihi al
+            if ' on ' in review_time:
+                review_time = review_time.split(' on ')[1]
             review_data = {
+                "reviewerId": r.get("reviewerId", ""),
+                "asin": r.get("asin", ""),
                 "reviewerName": r.get("reviewerName", ""),
                 "reviewerText": r.get("reviewerText", ""),
-                "overall": r.get("overall", ""),
-                "reviewTime": r.get("reviewTime", "")
+                "overall": overall_rating,
+                "reviewTime": review_time
             }
             print(review_data)
             writer.writerow(review_data)
@@ -71,15 +82,15 @@ def save_data(url):
         return
 
 # product_data = []
-with open("urls.txt", 'r') as urllist, open('data.csv', 'w') as outfile:
-    writer = csv.DictWriter(outfile, fieldnames=["reviewerID", "asin", "reviewerName", "reviewerText", "overall", "reviewTime"], quoting=csv.QUOTE_ALL)
+with open("urls.txt", 'r') as urllist, open('../Data/data.csv', 'w') as outfile:
+    writer = csv.DictWriter(outfile, fieldnames=["reviewerId", "asin", "reviewerName", "reviewerText", "overall", "reviewTime"], quoting=csv.QUOTE_ALL)
     writer.writeheader()
 
     baseUrl = urllist.readlines()[0]
     print(baseUrl)
 
     i: int
-    for i in range(10):
+    for i in range(5):
         url = baseUrl + str(i)
         print("Scraping to: %s ..." % url)
         save_data(url)

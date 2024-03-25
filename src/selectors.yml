@@ -7,7 +7,7 @@ reviews:
     type: Text
     children:
         reviewerId:
-            css: review
+            css: 'div.a-section review aok-relative'
             type: Text
         asin:
             css: 'span#cr-state-object'
