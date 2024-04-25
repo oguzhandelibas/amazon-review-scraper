@@ -90,13 +90,9 @@ with open("src/urls.txt", 'r') as urllist, open('data.csv', 'w') as outfile:
     print(baseUrl)
 
     i: int
-    for i in range(5):
-        url = baseUrl + str(i)
+    for i in range(10):
+        url = baseUrl + str(i) + "&filterByStar=one_star"
         print("Scraping to: %s ..." % url)
         save_data(url)
-
-    #for url in urllist.readlines():
-     #   print("Scraping to: %s ..." % url)
-      #  save_data(url)
 
 
